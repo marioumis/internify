@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div class="container mt-4">
+  <h2 class="mb-3">Liste des stages</h2>
+
+  <!-- Sélecteur de domaine -->
+  <div class="form-group mb-3">
+    <label for="domaineSelect">Filtrer par domaine :</label>
+    <select id="domaineSelect" class="form-control" [(ngModel)]="selectedDomaine">
+      <option value="">-- Tous les domaines --</option>
+      <option *ngFor="let domaine of domaines" [value]="domaine">
+        {{ domaine }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Liste des stages filtrés -->
+  <div *ngIf="filteredInternships.length > 0; else noStages">
+    <div class="card mb-3" *ngFor="let stage of filteredInternships">
+      <div class="card-body">
+        <h5 class="card-title">{{ stage.titre }}</h5>
+        <h6 class="card-subtitle text-muted">{{ stage.duree }}</h6>
+        <p class="card-text mt-2">{{ stage.description }}</p>
+        <span class="badge bg-info text-dark">{{ stage.domaine }}</span>
+         <button class="btn">
+          Postuler
+         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message si aucun stage -->
+  <ng-template #noStages>
+    <div class="alert alert-warning">Aucun stage trouvé pour ce domaine.</div>
+  </ng-template>
+</div>
+<app-footer></app-footer>
